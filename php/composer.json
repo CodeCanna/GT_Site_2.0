@@ -1,0 +1,17 @@
+{
+    "name": "greenthumb/php",
+    "description": "The class that builds a new news article for the GT main site.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Greenthumb\\Php\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "CodeCanna",
+            "email": "codecannamw@gmail.com"
+        }
+    ],
+    "require": {}
+}
