@@ -1,16 +1,18 @@
 <?php
 namespace GreenThumb\NewsArticle;
 
+use ArgumentCountError;
 use DateTime;
+use InvalidArgumentException;
 
 /**
  * 
  */
 class NewsArticle {
-    public int $articleId;
-    public DateTime $articleDate;
-    public string $articleTitle;
-    public string $articleContent;
+    private int $articleId;
+    private DateTime $articleDate;
+    private string $articleTitle;
+    private string $articleContent;
     
     /**
      * 
@@ -25,7 +27,7 @@ class NewsArticle {
     /**
      * @return int
      */
-    public function getArticleId(): int {
+    protected function getArticleId(): int {
         return $this->articleId;
     }
 
@@ -33,7 +35,17 @@ class NewsArticle {
      * @param $articleId
      */
     protected function setArticleId(int $articleId): void {
-        $this->articleId = $articleId;
+        try {
+            if (empty($articldId)) {
+                throw new InvalidArgumentException();
+            }
+
+            $this->articleId = $articleId;
+        } catch(ArgumentCountError $e) {
+            echo 'Article ID argument not passed for some reason...';
+        } catch(InvalidArgumentException $e) {
+            echo 'Article ID must not be empty...';
+        }
     }
 
     /**
