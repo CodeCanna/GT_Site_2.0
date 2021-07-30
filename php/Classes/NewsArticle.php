@@ -23,7 +23,7 @@ class NewsArticle {
      * @param string $articleTitle
      * @param string $articleContent
      */
-    function __construct(string $articleId, DateTime $articleDate, string $articleTitle, string $articleContent) {
+    function __construct(string $articleId, DateTime $articleDate, string $articleTitle, string $articleContent, array $articleImages) {
         $this->setArticleId($articleId);
         $this->setArticleDate($articleDate);
         $this->setArticleTitle($articleTitle);
@@ -140,8 +140,24 @@ class NewsArticle {
         }
     }
 
+    /**
+     * @param array $imgArray
+     */
+    public function setArticleImages(array $imgArray): void
+    {
+        if (! empty($imgArray)) {
+            foreach($imgArray as $img)
+            {
+                echo $img;
+            }
+        }
+    }
+
     /* Special Getters */
 
+    /**
+     * 
+     */
     public function getAllArticles($db) {
         echo 'all thingies!!';
     }
