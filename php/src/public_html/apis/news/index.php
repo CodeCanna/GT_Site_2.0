@@ -1,27 +1,13 @@
 <?php
 require_once(dirname(__DIR__, 4) . "/vendor/autoload.php");
-require_once(dirname(__DIR__, 3) . "/Classes/NewsArticle.php");
+require_once(dirname(__DIR__, 4) . "/Classes/NewsArticle.php");
 
-use DateTime;
 use GreenThumb\php\NewsArticle;
-use mysqli;
 
 // Create empty reply
 $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
-
-try {
-    // Lets get our secret sauce
-    $saucyPath = 'secrets.json';//'/home/greenthu/secrets.json';
-    $sauce = fopen($saucyPath, 'r') ? fread($sauce, filesize($sauce)) : throw new Exception();
-} catch(Exception | Error $e) {
-    echo $e;
-    echo 'There was a problem reading form the secret sauce!  Exitting...';
-    return 1;
-}
-
-
 
 try {
     // Get the request method
@@ -34,11 +20,10 @@ try {
         $articleId = uniqid(); // Generate ID for article
         $articleDateTime = new DateTime();
         // Get the content from our $_POST array
-        // Convert date string to
         $articleTitle = $_POST['articleTitle'];
         $articleContent = $_POST['articleContent'];
 
-        $newArticle = new NewsArticle($articleId, $articleDateTime, $articleTitle, $articleContent);
+        $newArticle = new NewsArticle($articleId, $articleDateTime, $articleTitle, $articleContent, $_FILES);
 
         var_dump($newArticle);
     }
