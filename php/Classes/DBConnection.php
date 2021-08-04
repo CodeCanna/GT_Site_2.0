@@ -13,8 +13,10 @@ class DBGTConnection extends mysqli
     function __construct(string $saucyPath)
     {
         try {
-            $saucyFile = dirname(__DIR__, 3) . '/' . $saucyPath;
+            // $saucyFile = dirname(__DIR__, 5) . '/' . $saucyPath;
+            echo dirname(__DIR__, 4);
             // Check if our secrets.json file exists
+            /*
             if (! $saucyFile) {
                 throw new Exception();
             }
@@ -32,7 +34,7 @@ class DBGTConnection extends mysqli
              
             // Pass the sauce to the parent constructor
             parent::__construct($sauce->sauce->hostname, $sauce->sauce->username, $sauce->sauce->password, $sauce->sauce->database);
-
+            */
         } catch(Exception $e) {
             echo 'Secret sauce not found, connot connect to the database without the secret sauce!' . "$saucyPath given...";
         }
