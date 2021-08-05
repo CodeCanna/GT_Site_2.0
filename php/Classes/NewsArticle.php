@@ -28,10 +28,10 @@ class NewsArticle
     private $articleDate;
     private $articleTitle;
     private $articleContent;
-    private $articleImages;
+    private static $articleImages;
 
     /**
-     * @param int $articleId
+     * @param string $articleId
      * @param DateTime $articleDate
      * @param string $articleTitle
      * @param string $articleContent
@@ -164,7 +164,7 @@ class NewsArticle
         }
     }
 
-    public function getArticleImages(): array
+    public function getArticleImages(): array | NULL
     {
         return $this->articleImages;
     }
@@ -204,13 +204,27 @@ class NewsArticle
                 if (pathinfo(UPLOAD_DIR."$img", PATHINFO_EXTENSION) === 'jpg' || pathinfo(UPLOAD_DIR."$img", PATHINFO_EXTENSION) === 'jpeg')
                 {
                     move_uploaded_file($imgPath, UPLOAD_DIR . "/jpg/" . $img);
+                    $this->articleImages[$img] = UPLOAD_DIR . "/jpg/" . $img;
                 } else {
                     move_uploaded_file($imgPath, UPLOAD_DIR . "/png/" . $img);
+                    $this->articleImages[$img] = UPLOAD_DIR . "/png/" . $img;
                 }
             }
         } catch (Exception $e) {
             echo $e;
         }
+    }
+
+    /* Special methods */
+
+    /**
+     * This function serializes $articleImages to store in the API
+     * 
+     * @return string
+     */
+    public static function serializeArticleImages(): string
+    {
+        return serialize(self::$articleImages);
     }
 
     /* Special Getters */
