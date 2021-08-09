@@ -23,6 +23,7 @@ class DBGTConnection extends mysqli
 
             // The following if statment checks for the success of this line
             $saucyText = fread($sauceLadle, filesize($saucyFile)); // Get our text from secrets.json
+
             if (empty($saucyText) || $saucyText == NULL)
             {
                 echo 'There was a problem reading sauce...';
